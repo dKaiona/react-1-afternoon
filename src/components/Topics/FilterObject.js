@@ -17,16 +17,26 @@ export default class FilterObjects extends Component {
         this.setState({userInput: val});
     }
 
+    filter(userInput) {
+        let newArray = unFilteredArray.filter((currentO) => {
+             currentO === userInput
+        })
+        this.setState({filteredArray: newArray})
+    }
+    
+
     
 
     render(){
         return (
             <div className = 'puzzleBox filterObjectPB'>
                 <h4>Filter Object</h4>
-                <span className='puzzleText'></span>
-                <input className='inputLine' onChange = {(e) => this.handleChange(e.target.value)} type="text"/>
-                <button className = 'confirmationButton'>Push it</button>
-                <span className = 'resultsBox filterObjectRB'></span>
+                <span className='puzzleText'> Original: {JSON.stringify(this.state.unFilteredArray, null, 10)} </span>
+                <input className='inputLine' 
+                onChange = {(e) => this.handleChange(e.target.value)} type="text"/>
+                <button className = 'confirmationButton'
+                onClick = { () => {this.filter(this.state.userInput)} }>Push it</button>
+                <span className = 'resultsBox filterObjectRB'> Filtered : {JSON.stringify(this.state.filteredArray, null, 10)}</span>
             </div>
         )
     }
